@@ -1,0 +1,58 @@
+html {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+#ivan-yudo {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+}
+
+#what-is-yudo {
+	position: fixed;
+	right: 1%;
+	bottom: 1%;
+	color: black;
+}
+
+#email {
+	position: fixed;
+	right: 1%;
+	top: 1%;
+}
+
+.asterisk {
+	color: red;
+}
+
+.black-white-link {
+	text-decoration: none;
+	color: black;
+}
+
+.black-white-link:visited {
+	color: black;
+}
+
+.black-white-link:hover {
+	background-color: black;
+	color: white;
+}
+
+.red-white-link {
+	color: black;
+	text-decoration: none;
+}
+
+.red-white-link:visited {
+	color: black;
+}
+
+.red-white-link:hover {
+	color: red;
+}

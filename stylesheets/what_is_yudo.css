@@ -1,0 +1,35 @@
+html {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+#judeophobia-link {
+	color: black;
+	text-decoration: none;
+}
+
+#judeophobia-link:visited {
+	color: black;
+}
+
+#judeophobia-link:hover {
+	color: red;
+}
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}

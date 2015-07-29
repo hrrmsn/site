@@ -1,0 +1,35 @@
+body {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+.writer-link {
+	color: black;
+	text-decoration: none;
+}
+
+.writer-link:visited {
+	color: black;
+}
+
+.writer-link:hover {
+	color: red;
+}
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}

@@ -1,0 +1,41 @@
+body {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	text-align: center;
+}
+
+img {
+	width: 50%;
+	height: auto;
+}
+
+#jump-in-1998-link {
+	color: black;
+	text-decoration: none;
+}
+
+#jump-in-1998-link:visited{
+	color: black;
+}
+
+#jump-in-1998-link:hover {
+	background-color: black;
+	color: white;
+}
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited{
+	color: black;
+}
+
+#back-link:hover {
+	background-color: black;
+	color: white;
+}

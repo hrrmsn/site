@@ -1,0 +1,36 @@
+p {
+	margin: 0;
+}
+
+img {
+	width: 50%;
+	height: auto;
+}
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}
+
+#main-link {
+	color: black;
+	text-decoration: none;
+}
+
+#main-link:visited {
+	color: black;
+}
+
+#main-link:hover {
+	color: white;
+	background-color: black;
+}

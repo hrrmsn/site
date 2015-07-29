@@ -1,0 +1,48 @@
+body {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+.language-link {
+	color: black;
+	text-decoration: none
+}
+
+.language-link:visited {
+	color: black;
+}
+
+.language-link:hover {
+	color: red;
+}
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}
+
+#linus-torvalds-quote-link {
+	color: black;
+	text-decoration: none;
+}
+
+#linus-torvalds-quote-link:visited {
+	color: black;
+}
+
+#linus-torvalds-quote-link:hover {
+	color: blue;
+}
