@@ -26,6 +26,12 @@ p {
 	top: 1%;
 }
 
+#junk {
+	position: fixed;
+	left: 1%;
+	bottom: 1%;
+}
+
 .asterisk {
 	color: red;
 }

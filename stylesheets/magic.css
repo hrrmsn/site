@@ -1,0 +1,13 @@
+table {
+	border: 2px solid green;
+	border-collapse: collapse;
+}
+
+td {
+	border: 1px dashed blue;
+	padding: 5px;
+}
+
+p {
+	margin: 0;
+}

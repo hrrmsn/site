@@ -1,0 +1,35 @@
+html {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+#magic-square-generator-link {
+	color: black;
+	text-decoration: none;
+}
+
+#magic-square-generator-link:visited {
+	color: black;
+}
+
+#magic-square-generator-link:hover {
+	color: red;
+}
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}
