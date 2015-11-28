@@ -202,42 +202,6 @@ var createEmptyArray = function(size) {
 	return array;	
 }
 
-// test method
-var isMagicSquareCorrect = function(square) {
-	var horizontalSums = createEmptyArray(square.getOrder());
-	var verticalSums = createEmptyArray(square.getOrder());
-	var mainDiagonalSum = 0, minorDiagonalSum = 0;
-	for (var y = 0; y < square.getOrder(); y++) {
-		for (var x = 0; x < square.getOrder(); x++) {
-			horizontalSums[y] += square.getAt(y, x);
-			verticalSums[x] += square.getAt(y, x);
-			if (y === x) mainDiagonalSum += square.getAt(y, x);
-			if (y + x === square.getOrder() - 1) minorDiagonalSum += square.getAt(y, x);
-		}
-	}
-
-	var validSumsNumber = 0;
-	for (var i = 0; i < square.getOrder(); i++) {
-		if (horizontalSums[i] === square.getMagicSum() && verticalSums[i] === square.getMagicSum()) {
-			validSumsNumber += 2;
-		}
-	}
-	if (mainDiagonalSum === square.getMagicSum() && minorDiagonalSum === square.getMagicSum()) validSumsNumber += 2;
-	return validSumsNumber === 2 * (square.getOrder() + 1);	
-}
-
-// test method
-var checkValidity = function() {
-	var counter = 0;
-	for (var i = 3; i < 23; i++) {
-		for (var j = -9; j < 11; j++) {
-			var testMagicSquare = new MagicSquare(i, j);
-			if (isMagicSquareCorrect(testMagicSquare)) counter++;
-		}
-	}
-	return counter === 400;
-}
-
 // main method
 var generateMagicSquare = function() {
 	var time = performance.now();
@@ -260,14 +224,8 @@ var generateMagicSquare = function() {
 
 	// print
 	document.getElementById("output").innerHTML = createMagicSquareHtmlTable(magicSquare);
-	document.getElementById("is-magic").innerHTML = "is magic: " + isMagicSquareCorrect(magicSquare);
 	document.getElementById("magic-sum").innerHTML = "magic sum: ";
-	document.getElementById("magic-sum").innerHTML += isMagicSquareCorrect(magicSquare) ? magicSquare.getMagicSum() 
-		: "undefined";
-	document.getElementById("validity-check").innerHTML = "validity check: <font color=red>failure</font>";
-	if (checkValidity()) {
-		document.getElementById("validity-check").innerHTML = "validity check: <font color=green>success</font>";
-	}
+	document.getElementById("magic-sum").innerHTML += magicSquare.getMagicSum();
 	var timeExecutionInSeconds = Math.round(((performance.now() - time) / 1000) * 1000) / 1000;
 	document.getElementById("time-execution").innerHTML = "generated in " + timeExecutionInSeconds + " sec";	
 }
