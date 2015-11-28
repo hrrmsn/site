@@ -2,45 +2,74 @@
 // * DEFINE MAGIC SQUARE CLASS *
 // *****************************
 
+// Create a magic square of size 'order' using the numbers 'startCountFrom' to 'startCountFrom + order^2 - 1'
 function MagicSquare(order, startCountFrom) {
-	this.order = order;
-	this.startCountFrom = startCountFrom;
-	this.magicSum = 0;
+	if (order < 3) {
+		alert("Order should be more than or equal 3. The magic square of order 2 does not exist.");
+		throw new Error("Order should be more than or equal 3.");
+	}
+	this._order = order;
+	this._startCountFrom = startCountFrom;
+	this._magicSum = this._order * (this._order * this._order + 2 * this._startCountFrom - 1) / 2;
 
-	this.matrix = [];
-	this.initializeMatrix();
+	this._matrix = [];
+	this._initializeMatrix();
+
+	this._generate();
 }
 
-MagicSquare.prototype.initializeMatrix = function() {
-	for (var i = 0; i < this.order; i++) {
-		this.matrix.push([]);
+
+MagicSquare.prototype.getMagicSum = function() {
+    return this._magicSum;
+}
+
+MagicSquare.prototype.getOrder = function() {
+    return this._order;
+}
+
+MagicSquare.prototype.getAt = function(y, x) {
+    return this._matrix[y][x];
+}
+
+
+MagicSquare.prototype._initializeMatrix = function() {
+	for (var i = 0; i < this._order; i++) {
+		this._matrix.push([]);
 	}
-	for (var i = 0; i < this.order; i++) {
-		for (var j = 0; j < this.order; j++) {
-			this.matrix[i][j] = null;
+	for (var y = 0; y < this._order; y++) {
+		for (var x = 0; x < this._order; x++) {
+			this._matrix[y][x] = null;
 		}
 	}
 }
 
-MagicSquare.prototype.generate = function() {
-	if (this.order % 4 === 0) {
-		this.generateDoubleEvenOrderMagicSquare();
-	} else if (this.order % 2 === 0) {
-		this.generateSingleEvenOrderMagicSquare();
+MagicSquare.prototype._generate = function() {
+	if (this._order % 4 === 0) {
+		this._generateDoubleEvenOrderMagicSquare();
+	} else if (this._order % 2 === 0) {
+		this._generateSingleEvenOrderMagicSquare();
 	} else {
-		this.generateOddOrderMagicSquare(this.matrix, 0, 0, this.order, this.startCountFrom);
-	}	
+		this._generateOddOrderMagicSquare(this._matrix, 0, 0, this._order, 0);
+	}
+
+	// add startCountFrom to the all matrix elements
+	for (var y = 0; y < this._order; y++) {
+		for (var x = 0; x < this._order; x++) {
+			this._matrix[y][x] += this._startCountFrom;
+		}
+	}
 }
 
-MagicSquare.prototype.generateDoubleEvenOrderMagicSquare = function() {
+
+MagicSquare.prototype._generateDoubleEvenOrderMagicSquare = function() {
 	var unusedNumbers = [];
-	var counter = this.startCountFrom;
+	var counter = 0;
 
 	// put numbers to the right area
-	for (var i = 0; i < this.order; i++) {
-		for (var j = 0; j < this.order; j++) {
-			if (this.areCellIndexesFromTheRightArea(i, j)) {
-				this.matrix[i][j] = counter;
+	for (var y = 0; y < this._order; y++) {
+		for (var x = 0; x < this._order; x++) {
+			if (this._areCellIndexesFromTheRightArea(y, x)) {
+				this._matrix[y][x] = counter;
 			} else {
 				unusedNumbers.push(counter);
 			}
@@ -49,141 +78,117 @@ MagicSquare.prototype.generateDoubleEvenOrderMagicSquare = function() {
 	}
 
 	// put unused numbers to the wrong area
-	var indexI = unusedNumbers.length - 1;
-	for (var i = 0; i < this.order; i++) {
-		for (var j = 0; j < this.order; j++) {
-			if (this.matrix[i][j] === null) {
-				this.matrix[i][j] = unusedNumbers[indexI--];
+	var yCoordinate = unusedNumbers.length - 1;
+	for (var y = 0; y < this._order; y++) {
+		for (var x = 0; x < this._order; x++) {
+			if (this._matrix[y][x] === null) {
+				this._matrix[y][x] = unusedNumbers[yCoordinate--];
 			}
 		}
 	}
 }
 
-MagicSquare.prototype.areCellIndexesFromTheRightArea = function(indexI, indexJ) {
-	var oneQuarterOrder = Math.floor(this.order / 4);
-	var threeQuartersOrder = 3 * oneQuarterOrder;
+MagicSquare.prototype._areCellIndexesFromTheRightArea = function(y, x) {
+	var quarterSize = this._order / 4;
 
-	var topIRule = (indexI >= 0) && (indexI <= oneQuarterOrder - 1);
-	var bottomIRule = (indexI >= threeQuartersOrder) && (indexI <= this.order - 1);
-	var middleIRule = (indexI >= oneQuarterOrder) && (indexI <= threeQuartersOrder - 1);
+	var isMiddle = (quarterSize <= y) && (y < 3 * quarterSize);
+	var isCenter = (quarterSize <= x) && (x < 3 * quarterSize);
 
-	var leftJRule = (indexJ >= 0) && (indexJ <= oneQuarterOrder - 1);
-	var rightJRule = (indexJ >= threeQuartersOrder) && (indexJ <= this.order - 1);
-	var middleJRule = (indexJ >= oneQuarterOrder) && (indexJ <= threeQuartersOrder - 1);
-		
-	var topLeftAreaCase = topIRule && leftJRule;
-	var topRightAreaCase = topIRule && rightJRule;
-	var middleAreaCase = middleIRule && middleJRule;
-	var bottomLeftAreaCase = bottomIRule && leftJRule;
-	var bottomRightAreaCase = bottomIRule && rightJRule;
-
-	return topLeftAreaCase || topRightAreaCase || middleAreaCase || bottomLeftAreaCase || bottomRightAreaCase;
+	return isMiddle === isCenter;
 }
 
 
-MagicSquare.prototype.generateSingleEvenOrderMagicSquare = function() {
-	this.createABCDSquares(this.startCountFrom);
-	this.swapTwoAreas();
+MagicSquare.prototype._generateSingleEvenOrderMagicSquare = function() {
+	this._createABCDSquares();
+	this._swapTwoAreas();
 }
 
-MagicSquare.prototype.createABCDSquares = function(startNumber) {
-	var size = this.order / 2;
-	var oneQuarterOfOrderSquare = (this.order * this.order) / 4;
-	var startCountFrom = startNumber;
+MagicSquare.prototype._createABCDSquares = function() {
+	var size = this._order / 2;
+	var quarterOfOrderSquare = (this._order * this._order) / 4;
+	var counter = 0;
 
-	// create A, B, C, D squares in cycle
-	var alpha = 0;
-	while (alpha <= 3 * Math.PI / 2) {
-		this.generateOddOrderMagicSquare(this.matrix, Math.floor(Math.abs(Math.sin(alpha)) * (this.order / 2)), 
-			Math.floor(Math.abs(Math.sin(alpha + Math.floor(alpha / Math.PI) * (Math.PI / 2))) * (this.order / 2)), 
-			size, startCountFrom);
-		alpha += Math.PI / 2;
-		startCountFrom += oneQuarterOfOrderSquare;
-	}
+	this._generateOddOrderMagicSquare(this._matrix, 0, 0, size, counter);
+
+	counter += quarterOfOrderSquare;
+	this._generateOddOrderMagicSquare(this._matrix, this._order / 2, this._order / 2, size, counter);
+
+	counter += quarterOfOrderSquare;
+	this._generateOddOrderMagicSquare(this._matrix, 0, this._order / 2, size, counter);
+
+	counter += quarterOfOrderSquare;
+	this._generateOddOrderMagicSquare(this._matrix, this._order / 2, 0, size, counter);
 }
 
-MagicSquare.prototype.swapTwoMatrixElements = function(matrix, indexIFirst, indexJFirst, indexISecond, indexJSecond) {
-	var temp = matrix[indexIFirst][indexJFirst];
-	matrix[indexIFirst][indexJFirst] = matrix[indexISecond][indexJSecond];
-	matrix[indexISecond][indexJSecond] = temp;
-}
+MagicSquare.prototype._swapTwoAreas = function() {
+	var d = Math.floor(this._order / 4);
+	var halfOfOrder = this._order / 2;
 
-MagicSquare.prototype.swapTwoAreas = function() {
-	var d = Math.floor(this.order / 4);
-	var x = d - 1;
-	var halfOfOrder = this.order / 2;
-
-	for (var i = 0; i < halfOfOrder; i++) {
-		var offset = i === d ? 1 : 0;
+	for (var y = 0; y < halfOfOrder; y++) {
+		var offset = y === d ? 1 : 0;
 		// left area
-		for (var j = offset; j < d + offset; j++) {
-			this.swapTwoMatrixElements(this.matrix, i, j, i + halfOfOrder, j);
+		for (var x = offset; x < d + offset; x++) {
+			this._swapTwoMatrixElements(this._matrix, y, x, y + halfOfOrder, x);
 		}
 		// right area
-		for (var j = this.order - x; j < this.order; j++) {
-			this.swapTwoMatrixElements(this.matrix, i, j, i + halfOfOrder, j);
+		for (var x = this._order - d + 1; x < this._order; x++) {
+			this._swapTwoMatrixElements(this._matrix, y, x, y + halfOfOrder, x);
 		}
 	}
 }
 
+MagicSquare.prototype._swapTwoMatrixElements = function(matrix, firstY, firstX, secondY, secondX) {
+    var temp = matrix[firstY][firstX];
+    matrix[firstY][firstX] = matrix[secondY][secondX];
+    matrix[secondY][secondX] = temp;
+}
 
-MagicSquare.prototype.generateOddOrderMagicSquare = function(matrix, indexIStart, indexJStart, size, startNumber) {
+
+// use the Siamese method
+MagicSquare.prototype._generateOddOrderMagicSquare = function(matrix, y0, x0, size, startNumber) {
 	var counter = startNumber;
-	var indexI = indexIStart;
-	var indexJ = Math.floor(size / 2) + indexJStart;
+	var y = y0;
+	var x = x0 + (size - 1) / 2;
 
-	// set one to the top middle cell 
-	matrix[indexI][indexJ] = counter++;
+	// start at the top middle
+	matrix[y][x] = counter++;
 
 	// fill other cells
 	while (counter < size * size + startNumber) {
-		if (indexI === indexIStart && indexJ === indexJStart + size - 1) {
-			indexI++;
-		} else if (indexI === indexIStart && indexJ < indexJStart + size - 1) {
-			indexI = indexIStart + size - 1;
-			indexJ++;
-		} else if (indexI > indexIStart && indexJ === indexJStart + size - 1) {
-			indexI--;
-			indexJ = indexJStart;
-		} else if (matrix[indexI - 1][indexJ + 1] !== null) {
-			indexI++;
-		} else {
-			indexI--;
-			indexJ++;
+		// go diagonally
+		var newY = y - 1;
+		var newX = x + 1;
+
+		// wrap around
+		if (newY < y0) {
+			newY += size;
 		}
-		matrix[indexI][indexJ] = counter++;
+		if (newX === x0 + size) {
+			newX -= size;
+		}
+
+		if (matrix[newY][newX] !== null) {
+			// go down instead
+			newY = y + 1;
+			newX = x;
+		}
+
+		y = newY;
+		x = newX;
+		matrix[y][x] = counter++;
 	}
 }
 
-MagicSquare.prototype.isMagic = function() {
-	this.magicSum = this.order * (this.order * this.order + 2 * this.startCountFrom - 1) / 2;
 
-	var horizontalSums = this.createEmptyArray(this.order);
-	var verticalSums = this.createEmptyArray(this.order);
-	var mainDiagonalSum = 0, minorDiagonalSum = 0;
-	for (var i = 0; i < this.order; i++) {
-		for (var j = 0; j < this.order; j++) {
-			horizontalSums[i] += this.matrix[i][j];
-			verticalSums[j] += this.matrix[i][j];
-			if (i === j) mainDiagonalSum += this.matrix[i][j];
-			if (i + j === this.order - 1) minorDiagonalSum += this.matrix[i][j];
-		}
-	}
-
-	var validSumsNumber = 0;
-	for (var i = 0; i < this.order; i++) {
-		if (horizontalSums[i] === this.getMagicSum() && verticalSums[i] === this.getMagicSum()) validSumsNumber += 2;
-	}
-	if (mainDiagonalSum === this.getMagicSum() && minorDiagonalSum === this.getMagicSum()) validSumsNumber += 2;
-	return validSumsNumber === 2 * (this.order + 1);
-}
-
-MagicSquare.prototype.createHtmlTable = function() {
+// ===========================
+// GLOBAL FUNCTION DEFINITIONS
+// ===========================
+var createMagicSquareHtmlTable = function(square) {
 	var htmlTable = "<table>";
-	for (var i = 0; i < this.order; i++) {
+	for (var y = 0; y < square.getOrder(); y++) {
 		htmlTable += "<tr>";
-		for (var j = 0; j < this.order; j++) {
-			htmlTable += "<td>" + this.matrix[i][j] + "</td>";
+		for (var x = 0; x < square.getOrder(); x++) {
+			htmlTable += "<td>" + square.getAt(y, x) + "</td>";
 		}
 		htmlTable += "</tr>";
 	}
@@ -191,20 +196,35 @@ MagicSquare.prototype.createHtmlTable = function() {
 	return htmlTable;
 }
 
-MagicSquare.prototype.createEmptyArray = function(size) {
+var createEmptyArray = function(size) {
 	var array = [];
 	for (var i = 0; i < size; i++) array[i] = 0;
-	return array;
+	return array;	
 }
 
-MagicSquare.prototype.getMagicSum = function() {
-	return this.magicSum;
+// test method
+var isMagicSquareCorrect = function(square) {
+	var horizontalSums = createEmptyArray(square.getOrder());
+	var verticalSums = createEmptyArray(square.getOrder());
+	var mainDiagonalSum = 0, minorDiagonalSum = 0;
+	for (var y = 0; y < square.getOrder(); y++) {
+		for (var x = 0; x < square.getOrder(); x++) {
+			horizontalSums[y] += square.getAt(y, x);
+			verticalSums[x] += square.getAt(y, x);
+			if (y === x) mainDiagonalSum += square.getAt(y, x);
+			if (y + x === square.getOrder() - 1) minorDiagonalSum += square.getAt(y, x);
+		}
+	}
+
+	var validSumsNumber = 0;
+	for (var i = 0; i < square.getOrder(); i++) {
+		if (horizontalSums[i] === square.getMagicSum() && verticalSums[i] === square.getMagicSum()) {
+			validSumsNumber += 2;
+		}
+	}
+	if (mainDiagonalSum === square.getMagicSum() && minorDiagonalSum === square.getMagicSum()) validSumsNumber += 2;
+	return validSumsNumber === 2 * (square.getOrder() + 1);	
 }
-
-
-// ===========================
-// GLOBAL FUNCTION DEFINITIONS
-// ===========================
 
 // test method
 var checkValidity = function() {
@@ -212,8 +232,7 @@ var checkValidity = function() {
 	for (var i = 3; i < 23; i++) {
 		for (var j = -9; j < 11; j++) {
 			var testMagicSquare = new MagicSquare(i, j);
-			testMagicSquare.generate();
-			if (testMagicSquare.isMagic()) counter++;
+			if (isMagicSquareCorrect(testMagicSquare)) counter++;
 		}
 	}
 	return counter === 400;
@@ -228,28 +247,23 @@ var generateMagicSquare = function() {
 		alert("Order should be a positive number.");
 		throw new Error("Order should be a positive number.");
 	}
-
 	var order = parseInt(orderValue);
-	if (order < 3) {
-		alert("Order should be more than or equal 3. The magic square of order 2 does not exist.");
-		throw new Error("Order should be more than or equal 3.");
-	}
 
 	var startCountFromValue = document.getElementById("start-count-from").value;
 	if (!startCountFromValue.match(/^-?[0-9]+$/)) {
-		alert("Field value should be an integer number.");
-		throw new Error("Start count from field value should be an integer number.");
+		alert("Start from field value should be an integer number.");
+		throw new Error("Start from field value should be an integer number.");
 	}
 	var startCountFrom = parseInt(startCountFromValue);
 
 	var magicSquare = new MagicSquare(order, startCountFrom);
-	magicSquare.generate();
 
 	// print
-	document.getElementById("output").innerHTML = magicSquare.createHtmlTable();
-	document.getElementById("is-magic").innerHTML = "is magic: " + magicSquare.isMagic();
+	document.getElementById("output").innerHTML = createMagicSquareHtmlTable(magicSquare);
+	document.getElementById("is-magic").innerHTML = "is magic: " + isMagicSquareCorrect(magicSquare);
 	document.getElementById("magic-sum").innerHTML = "magic sum: ";
-	document.getElementById("magic-sum").innerHTML += magicSquare.isMagic() ? magicSquare.getMagicSum() : "undefined";
+	document.getElementById("magic-sum").innerHTML += isMagicSquareCorrect(magicSquare) ? magicSquare.getMagicSum() 
+		: "undefined";
 	document.getElementById("validity-check").innerHTML = "validity check: <font color=red>failure</font>";
 	if (checkValidity()) {
 		document.getElementById("validity-check").innerHTML = "validity check: <font color=green>success</font>";
