@@ -3,13 +3,18 @@ body {
 	font-size: 16px;
 }
 
+img {
+	width: 50%;
+	height: auto;
+}
+
 p {
 	text-align: center;
 }
 
-img {
-	width: 50%;
-	height: auto;
+.pbig {
+	text-align: center;
+	line-height: 400px;
 }
 
 #jump-in-1998-link {
