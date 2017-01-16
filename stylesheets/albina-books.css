@@ -1,0 +1,136 @@
+html {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+
+#albina-books-5th-grade-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-books-5th-grade-link:visited {
+	color: black;
+}
+
+#albina-books-5th-grade-link:hover {
+	color: red;
+}
+
+
+#albina-books-6th-grade-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-books-6th-grade-link:visited {
+	color: black;
+}
+
+#albina-books-6th-grade-link:hover {
+	color: red;
+}
+
+
+#albina-books-7th-grade-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-books-7th-grade-link:visited {
+	color: black;
+}
+
+#albina-books-7th-grade-link:hover {
+	color: red;
+}
+
+
+#albina-books-8th-grade-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-books-8th-grade-link:visited {
+	color: black;
+}
+
+#albina-books-8th-grade-link:hover {
+	color: red;
+}
+
+
+#albina-books-9th-grade-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-books-9th-grade-link:visited {
+	color: black;
+}
+
+#albina-books-9th-grade-link:hover {
+	color: red;
+}
+
+
+#albina-books-10th-grade-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-books-10th-grade-link:visited {
+	color: black;
+}
+
+#albina-books-10th-grade-link:hover {
+	color: red;
+}
+
+
+#albina-books-11th-grade-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-books-11th-grade-link:visited {
+	color: black;
+}
+
+#albina-books-11th-grade-link:hover {
+	color: red;
+}
+
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}
+
+
+#main-link {
+	color: black;
+	text-decoration: none;
+}
+
+#main-link:visited {
+	color: black;
+}
+
+#main-link:hover {
+	color: white;
+	background-color: black;
+}

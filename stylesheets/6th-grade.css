@@ -1,0 +1,66 @@
+html {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+
+#sixth-grade-nikolsky-link {
+	color: black;
+	text-decoration: none;
+}
+
+#sixth-grade-nikolsky-link:visited {
+	color: black;
+}
+
+#sixth-grade-nikolsky-link:hover {
+	color: red;
+}
+
+
+#sixth-grade-nikolsky-didakticheskie-link {
+	color: black;
+	text-decoration: none;
+}
+
+#sixth-grade-nikolsky-didakticheskie-link:visited {
+	color: black;
+}
+
+#sixth-grade-nikolsky-didakticheskie-link:hover {
+	color: red;
+}
+
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}
+
+
+#main-link {
+	color: black;
+	text-decoration: none;
+}
+
+#main-link:visited {
+	color: black;
+}
+
+#main-link:hover {
+	color: white;
+	background-color: black;
+}

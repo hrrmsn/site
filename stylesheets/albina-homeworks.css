@@ -1,0 +1,136 @@
+html {
+	font-family: Times;
+	font-size: 16px;
+}
+
+p {
+	margin: 0;
+}
+
+
+#albina-homework-001-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-homework-001-link:visited {
+	color: black;
+}
+
+#albina-homework-001-link:hover {
+	color: red;
+}
+
+
+#albina-homework-002-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-homework-002-link:visited {
+	color: black;
+}
+
+#albina-homework-002-link:hover {
+	color: red;
+}
+
+
+#albina-homework-003-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-homework-003-link:visited {
+	color: black;
+}
+
+#albina-homework-003-link:hover {
+	color: red;
+}
+
+
+#albina-5th-grade-test-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-5th-grade-test-link:visited {
+	color: black;
+}
+
+#albina-5th-grade-test-link:hover {
+	color: red;
+}
+
+
+#albina-6th-grade-testi-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-6th-grade-testi-link:visited {
+	color: black;
+}
+
+#albina-6th-grade-testi-link:hover {
+	color: red;
+}
+
+
+#albina-6th-grade-testii-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-6th-grade-testii-link:visited {
+	color: black;
+}
+
+#albina-6th-grade-testii-link:hover {
+	color: red;
+}
+
+
+#albina-7th-grade-test-link {
+	color: black;
+	text-decoration: none;
+}
+
+#albina-7th-grade-test-link:visited {
+	color: black;
+}
+
+#albina-7th-grade-test-link:hover {
+	color: red;
+}
+
+
+#back-link {
+	color: black;
+	text-decoration: none;
+}
+
+#back-link:visited {
+	color: black;
+}
+
+#back-link:hover {
+	color: white;
+	background-color: black;
+}
+
+
+#main-link {
+	color: black;
+	text-decoration: none;
+}
+
+#main-link:visited {
+	color: black;
+}
+
+#main-link:hover {
+	color: white;
+	background-color: black;
+}

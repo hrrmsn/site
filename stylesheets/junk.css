@@ -20,6 +20,19 @@ p {
 	color: red;
 }
 
+#tutoring-link {
+	color: black;
+	text-decoration: none;
+}
+
+#tutoring-link:visited {
+	color: black;
+}
+
+#tutoring-link:hover {
+	color: red;
+}
+
 #back-link {
 	color: black;
 	text-decoration: none;
